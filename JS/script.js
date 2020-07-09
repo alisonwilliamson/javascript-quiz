@@ -1,83 +1,78 @@
 // get all the variables from the html
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('question')
-const answerButtonsElement = document.getElementById('answer-buttons')
-const header = document.getElementById("header")
-const description = document.getElementById("description")
-const timer = document.getElementById("time-remaining")
-let timeleft = 75;
+const startButton = document.getElementById("start-btn");
+const nextButton = document.getElementById("next-btn");
+const questionContainerEl = document.getElementById("question-container");
+const questionEl = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const header = document.getElementById("header");
+const description = document.getElementById("description");
+var timer = document.getElementById("time-remaining");
 
 
-let shuffledQuestions = "" 
-let currentQuestionIndex = ""
-let secondsLeft = ""
+
+let shuffledQuestions = ""; 
+let currentQuestionIndex = "";
+let secondsLeft = "";
+let timeEl;
 
 // when start button is clicked, quiz begins
-startButton.addEventListener('click', startQuiz)
-nextButton.addEventListener('click', () => {
+startButton.addEventListener("click", startQuiz)
+nextButton.addEventListener("click", () => {
   currentQuestionIndex++
-  setNextQuestion()
+  nextQuestion()
 })
 
 // starts the quiz
 function startQuiz() {
-  var downloadTimer = setInterval(function(){
-  if(timeleft <= 0){
-    clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Finished";
-  } else {
-    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
-  }
-  timeleft -= 1;
-}, 1000);
+  time = questions.length * 15
+
   // removes the header, description & start button
-  startButton.classList.add('hide')
+  startButton.classList.add("hide")
   header.classList.add("hide")
   description.classList.add("hide")
   // picks a random question from the questions array
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   // starts on first question in shuffled questions array
   currentQuestionIndex = 0
-  questionContainerElement.classList.remove('hide')
+  questionContainerEl.classList.remove("hide")
   
 
-  setNextQuestion()
-}
+  nextQuestion();
+  timeEl = setInterval(countDown, 1000);
+};
 
 
+function countDown(){
+  // update time
+  time--;
+  timer.textContent = time;
+  if (time <= 0) {
 
-
-
-
-
-
-
-
+  }
+};
 
 
 // display the next quesiton
-function setNextQuestion() {
+function nextQuestion() {
   defaultState()
   showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
 function showQuestion(question) {
-  questionElement.innerText = question.question
+  questionEl.innerText = question.question
   // loops through the answers
   question.answers.forEach(answer => {
     // creates a button for each answer
-    const button = document.createElement('button')
+    const button = document.createElement("button")
     button.innerText = answer.text
-    button.classList.add('btn')
+    button.classList.add("btn")
     // checks if answer is correct and adds data attribute onto button element
     if (answer.correct) {
       button.dataset.correct = answer.correct
     }
     // listening for when correct answer is clicked
-    button.addEventListener('click', selectAnswer)
-    answerButtonsElement.appendChild(button)
+    button.addEventListener("click", selectAnswer)
+    answerButtons.appendChild(button)
   })
 }
 
@@ -85,10 +80,10 @@ function showQuestion(question) {
 function defaultState() {
   clearStatusClass(document.body)
   // hides the next button for default state
-  nextButton.classList.add('hide')
+  nextButton.classList.add("hide")
   // loops through all children of answer button elements
-  while (answerButtonsElement.firstChild) {
-    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild)
   }
 }
 
@@ -98,14 +93,14 @@ function selectAnswer(e) {
   const correct = selectedButton.dataset.correct
   setStatusClass(document.body, correct)
   // creates an array from answer button children
-  Array.from(answerButtonsElement.children).forEach(button => {
+  Array.from(answerButtons.children).forEach(button => {
     setStatusClass(button, button.dataset.correct)
   })
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove('hide')
+    nextButton.classList.remove("hide")
   } else {
-    startButton.innerText = 'Restart'
-    startButton.classList.remove('hide')
+    startButton.innerText = "Restart"
+    startButton.classList.remove("hide")
   }
 }
 
@@ -113,16 +108,16 @@ function setStatusClass(element, correct) {
   clearStatusClass(element)
   // if answer is correct, adds "correct" class
   if (correct) {
-    element.classList.add('correct')
+    element.classList.add("correct")
     // if answer is wrong, adds "wrong" class
   } else {
-    element.classList.add('wrong')
+    element.classList.add("wrong")
   }
 }
 
 function clearStatusClass(element) {
-  element.classList.remove('correct')
-  element.classList.remove('wrong')
+  element.classList.remove("correct")
+  element.classList.remove("wrong")
 }
 
 // creates array of questions with answers
