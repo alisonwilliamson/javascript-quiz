@@ -10,17 +10,50 @@
   <title>Quiz App</title>
 </head>
 <body>
+  <!-- quiz start page -->
   <div class="container">
-    <div class="row">
-      <div class="card justify-center text-center" style="width: 50rem;">
-        <div class="card-body">
-          <h1 class="card-title">Coding Quiz Challenge</h1>
-          <p class="card-text">Try to answer the following code-related quesitons within the time limit. Keep in mind that the incorrect answers will penalize your score/time by ten seconds!</p>
-          <button type="button" class="btn btn-primary btn-lg">Start Quiz</button>
+    <div class="row mt-5">
+      <div class="col-md-12 d-flex justify-content-center align-content-center">
+        <div class="card justify-center text-center" style="width: 50rem;">
+          <div class="card-body">
+            <h1 class="card-title">Coding Quiz Challenge</h1>
+            <p class="card-text">Try to answer the following code-related quesitons within the time limit. Keep in mind that the incorrect answers will penalize your score/time by ten seconds!</p>
+            <button type="button" class="btn btn-primary btn-lg">Start Quiz</button>
+          </div>
         </div>
       </div>
     </div>
-   </div>
+    <!--timer page with question  -->
+    <div class="container hide">
+      <div class="row mt-5">
+        <div class="col-md-12 d-flex justify-content-center align-content-center">
+          <div class="card justify-center text-center" style="width: 50rem;">
+            <div class="card-body">
+              <h1 class="card-title">Coding Quiz Challenge</h1>
+              <p class="card-time">Time:</p>
+              <p class="question">Question</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- save score page -->
+      <div class="container hide">
+        <div class="row mt-5">
+          <div class="col-md-12 d-flex justify-content-center align-content-center">
+            <div class="card justify-center text-center" style="width: 50rem;">
+              <div class="card-body">
+                <h1 class="card-title">All done!</h1>
+                <p class="card-text">Enter your intials to save your final score.</p>
+                <label for="initials">Initials:</label>
+                <input type="text" class="enter-initals" id="enter-initals"></br>
+                <button type="button" class="btn btn-primary btn-lg">Submit</button>
+                <button type="button" class="btn btn-primary btn-lg">Start Over</button>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+</div>
 </body>
 </html>
 
